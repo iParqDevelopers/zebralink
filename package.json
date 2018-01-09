@@ -1,0 +1,31 @@
+{
+  "name": "com.apache.cordova.plugins.zebra",
+  "version": "1.0.0",
+  "description": "Cordova/Phonegap plugin for Zebra bluetooth printers",
+  "cordova": {
+    "id": "com.apache.cordova.plugins.zebra",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidmricardo/zebralink.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "author": "",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/davidmricardo/zebralink/issues"
+  },
+  "homepage": "https://github.com/davidmricardo/zebralink#readme"
+}
