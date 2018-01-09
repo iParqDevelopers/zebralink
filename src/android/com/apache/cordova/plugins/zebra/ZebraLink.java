@@ -426,6 +426,33 @@ public class ZebraLink extends CordovaPlugin {
 			cid.error(ex.getLocalizedMessage());
 		}
 	}
+        /**
+         * Converts a text string with extended ASCII characters
+         * into a Java-friendly byte array.
+         * @param input
+         * @return
+         */
+        private byte[] convertExtendedAscii(String input)
+        {
+                int length = input.length();
+                byte[] retVal = new byte[length];
+
+                for(int i=0; i<length; i++)
+                {
+                          char c = input.charAt(i);
+
+                          if (c < 127)
+                          {
+                                  retVal[i] = (byte)c;
+                          }
+                          else
+                          {
+                                  retVal[i] = (byte)(c - 256);
+                          }
+                }
+
+                return retVal;
+        }
 
 	public JSONObject getStatusForPrinterConnection(BluetoothConnection connection)
 	{
@@ -500,7 +527,7 @@ public class ZebraLink extends CordovaPlugin {
 
 			synchronized(ZebraLink.lock)
 			{
-				ZebraLink.printerConnection.write(template.getBytes());
+				ZebraLink.printerConnection.write(convertExtendedAscii(template));
 			}
 			cid.success("Success");
 		}

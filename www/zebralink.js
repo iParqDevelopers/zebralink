@@ -93,7 +93,19 @@ cordova.define("cordova/plugins/zebralink",
 		
 		return exec(function(){}, fail, classname, "disconnect", [options]);
 	};
+        function platform()
+        {
 
+           if(navigator.userAgent.match(/Android/i))
+           {
+              return "droid";
+           }
+           if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i)) || (navigator.userAgent.match(/iPod/i))) // iPhone, iPod, iPad
+           {
+              return "ios";
+           }
+           alert("Platform detection failed - please file a bug");
+        }
 	ZebraLink.prototype.print = function(success,fail,options)
 	{
 		if (!fail) { fail = function() {}; }
