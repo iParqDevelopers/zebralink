@@ -1,6 +1,9 @@
 # zebralink
 A Cordova/Phonegap plugin for Zebra bluetooth printers
 
+##This Plugin is Unmaintained 
+I no longer work on any projects using Cordova and Zebra printers and this project is essentially abandoned.  It worked for me last I used it (few years ago) and I have taken a few pull requests but I don't have the resources to maintain it.  Anybody interested in adopting this plugin, please contact me and I will gladly transfer ownership.
+
 ##Usage
 You can send data in ZPL Zebra Programing Language:
 
