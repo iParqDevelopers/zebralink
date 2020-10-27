@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.apache.cordova.plugins.zebra"
-    version="1.0.0">
+    version="1.0">
 
     <name>ZebraLink</name>
 	<description>Cordova/Phonegap plugin for Zebra bluetooth printers</description>
@@ -11,22 +12,26 @@
     </engines>    
 
     <js-module src="www/zebralink.js" name="ZebraLink">
-        <clobbers target="cordova.plugins.zebralink" />
+        <clobbers target="ZebraLink" />
     </js-module>
 
     <!-- android -->
     <platform name="android">
 
-      <config-file target="AndroidManifest.xml" parent="/*">
-         <uses-permission android:name="android.permission.BLUETOOTH" />
-      </config-file>
-	  <source-file src="src/android/com/apache/cordova/plugins/zebra/ZebraLink.java" target-dir="src/com/apache/cordova/plugins/zebra/" />
+        <source-file src="src/android/com/apache/cordova/plugins/zebra/ZebraLink.java" target-dir="src/com/apache/cordova/plugins/zebra/" />
+        <source-file src="src/android/ZSDK_ANDROID_API.jar" target-dir="libs"/>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        </config-file>
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="ZebraLink">
                 <param name="android-package" value="com.apache.cordova.plugins.zebra.ZebraLink" />
             </feature>
         </config-file>
-        <source-file src="src/android/ZSDK_ANDROID_API.jar" target-dir="libs"/>
+
     </platform>
 </plugin>

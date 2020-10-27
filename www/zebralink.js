@@ -2,9 +2,13 @@
  * PhoneGap is available under *either* the terms of the modified BSD license *or* the
  * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
  *
- * Copyright (c) Todd Blanchard 2010
- * Copyright (c) 2010, iNET Inc.
+ * Copyright (c) Matt Kane 2010
+ * Copyright (c) 2010, IBM Corporation
  */
+
+//;(function(){
+
+//if (PhoneGap.hasResource("zebralink")) return
 
 cordova.define("cordova/plugins/zebralink", 
   function(require, exports, module) {
@@ -36,7 +40,7 @@ cordova.define("cordova/plugins/zebralink",
 		}
 
 		setTimeout(function(){
-			//progress('Finding Printers...');
+			progress('Finding Printers...');
 		},500);
 		
 		return exec(success,fail, classname, "discover", [options]);
@@ -47,7 +51,11 @@ cordova.define("cordova/plugins/zebralink",
 	{
 		console.log("ZebraLink.prototype.connect");
 
-		if (!fail) { fail = function(error) { alert("ZebraLink.Connect failed: " + error); }; }
+		if (!fail) {
+			fail = function(error) {
+				showAlert('Error', 'ZebraLink.Connect failed: ' + error, 'Dismiss');
+			};
+		}
 
 		if (typeof fail != "function")  {
 			console.log("ZebraLink.connect failure: failure parameter not a function");
@@ -61,7 +69,7 @@ cordova.define("cordova/plugins/zebralink",
 
 		var label = options.address;
 		if(options.printer && options.printer.name) { label = options.printer.name; }
-
+		// alert('what we are connecting to: ' + label);
 		return exec(success,fail, classname, "connect", [options]);
 	};
 
@@ -93,19 +101,7 @@ cordova.define("cordova/plugins/zebralink",
 		
 		return exec(function(){}, fail, classname, "disconnect", [options]);
 	};
-        function platform()
-        {
 
-           if(navigator.userAgent.match(/Android/i))
-           {
-              return "droid";
-           }
-           if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPad/i)) || (navigator.userAgent.match(/iPod/i))) // iPhone, iPod, iPad
-           {
-              return "ios";
-           }
-           alert("Platform detection failed - please file a bug");
-        }
 	ZebraLink.prototype.print = function(success,fail,options)
 	{
 		if (!fail) { fail = function() {}; }
@@ -123,7 +119,7 @@ cordova.define("cordova/plugins/zebralink",
 			
 		if(platform()!=='droid')
 		{
-			alert('Print: ' + JSON.stringify(options));
+			showAlert('', 'Print: ' + JSON.stringify(options), 'Dismiss');
 			setTimeout(success,400);
 		}
 		else
@@ -193,26 +189,38 @@ cordova.define("cordova/plugins/zebralink",
 	{
 		if(!fail)
 		{
-			fail = function(msg) { setTimeout(function(){ alert("Printer not ready: "+msg); },1); };
+			fail = function(msg) {
+				setTimeout(function() {
+					showAlert('Error', 'Printer not ready: ' + msg, 'Dismiss');
+				}, 1);
+			};
 		}
-		
+
 		if(!success)
 		{
-			success = function() { setTimeout(function(){alert("Printer is ready.");},1); };
+			success = function() {
+				setTimeout(function() {
+					showAlert('Success', 'Printer is ready', 'Dismiss');
+				}, 1);
+			};
 		}
-			
+
 		if(platform()!=='droid')
 		{
-			if(confirm("Check: Printer is OK?")){
 				setTimeout(function(){
 					success();
 				},1000);
-			}
-			else{
-				setTimeout(function(){
-					fail('printer connection failed.');
-				},1000);
-			}
+
+			// if(confirm("Check: Printer is OK?")){
+			// 	setTimeout(function(){
+			// 		success();
+			// 	},1000);
+			// }
+			// else{
+			// 	setTimeout(function(){
+			// 		fail('printer connection failed.');
+			// 	},1000);
+			// }
 		}
 		else
 		{
