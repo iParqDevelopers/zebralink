@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.apache.cordova.plugins.zebra"
-    version="1.0.0">
+    version="1.0">
 
     <name>ZebraLink</name>
 	<description>Cordova/Phonegap plugin for Zebra bluetooth printers</description>
@@ -12,7 +12,7 @@
     </engines>
 
     <js-module src="www/zebralink.js" name="ZebraLink">
-        <clobbers target="cordova.plugins.zebralink" />
+        <clobbers target="ZebraLink" />
     </js-module>
 
     <!-- android -->
