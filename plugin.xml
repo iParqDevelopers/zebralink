@@ -19,6 +19,8 @@
 
       <config-file target="AndroidManifest.xml" parent="/*">
          <uses-permission android:name="android.permission.BLUETOOTH" />
+         <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+         <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
       </config-file>
 	  <source-file src="src/android/com/apache/cordova/plugins/zebra/ZebraLink.java" target-dir="src/com/apache/cordova/plugins/zebra/" />
 
